@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<div class="container mt-5 text-center">
+    <h1 class="mb-4" style="color:#f1f1f1;">Área Administrativa</h1>
+
+    <ul class="list-unstyled">
+        <li class="mb-2">
+            <a asp-controller="Genres" asp-action="Index" class="btn btn-primary-custom">Gêneros</a>
+        </li>
+        <li class="mb-2">
+            <a asp-controller="Artists" asp-action="Index" class="btn btn-primary-custom">Artistas</a>
+        </li>
+        <li class="mb-2">
+            <a asp-controller="Productions" asp-action="Index" class="btn btn-primary-custom">Produções</a>
+        </li>
+        <li class="mb-2">
+            <a asp-controller="Messages" asp-action="Index" class="btn btn-primary-custom">Mensagens</a>
+        </li>
+    </ul>
+</div>
+
+<style>
+    .btn-primary-custom {
+        background: linear-gradient(45deg, #6f42c1, #bb86fc);
+        border: none;
+        color: #fff;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background-size: 200% 200%;
+        padding: 10px 20px;
+        font-size: 1.1rem;
+    }
+
+        .btn-primary-custom:hover {
+            background-position: 100% 0;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+    body {
+        background-color: #121212;
+        color: #f1f1f1;
+    }
+</style>

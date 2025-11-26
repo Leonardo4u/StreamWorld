@@ -1,0 +1,21 @@
+@model StreamWorld.Models.Genero
+
+@{
+    ViewData["Title"] = "Excluir Gênero";
+}
+
+<h1>Excluir Gênero</h1>
+
+<div class="alert alert-warning">Tem certeza que deseja excluir este gênero?</div>
+
+<dl class="row">
+    <dt class="col-sm-2">Nome</dt>
+    <dd class="col-sm-10">@Model.Nome</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <button class="btn btn-danger" type="submit">Excluir</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

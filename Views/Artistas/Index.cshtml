@@ -1,0 +1,95 @@
+@model IEnumerable<StreamWorld.Models.Artista>
+
+@{
+    ViewData["Title"] = "Artistas e Diretores";
+    var nomeFiltro = ViewBag.NomeFiltro as string;
+    var paisFiltro = ViewBag.PaisFiltro as string;
+}
+
+<div class="container my-4">
+    <h1 class="mb-4">Artistas e Diretores</h1>
+
+    <!-- Filtros de Pesquisa -->
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-5">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="@nomeFiltro" placeholder="Buscar por nome...">
+        </div>
+        <div class="col-md-5">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" class="form-control" id="pais" name="pais" value="@paisFiltro" placeholder="Buscar por país...">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary-custom w-100">Buscar</button>
+        </div>
+    </form>
+
+    @if (!string.IsNullOrEmpty(nomeFiltro) || !string.IsNullOrEmpty(paisFiltro))
+    {
+        <div class="mb-3">
+            <a asp-action="Index" class="btn btn-outline-custom btn-sm">Limpar Filtros</a>
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Nenhum artista ou diretor encontrado.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var artista in Model)
+            {
+                <div class="col-md-4 col-lg-3 mb-4">
+                    <div class="card h-100 bg-dark text-light border-secondary">
+                        @if (!string.IsNullOrEmpty(artista.LinkFoto))
+                        {
+                            <img src="@artista.LinkFoto" class="card-img-top" alt="@artista.Nome" style="height: 300px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 300px;">
+                                <i class="bi bi-person-circle" style="font-size: 5rem; color: #6c757d;"></i>
+                            </div>
+                        }
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">@artista.Nome</h5>
+                            @if (!string.IsNullOrEmpty(artista.PaisOrigem))
+                            {
+                                <p class="card-text text-muted mb-2">
+                                    <i class="bi bi-geo-alt"></i> @artista.PaisOrigem
+                                </p>
+                            }
+                            <p class="card-text mb-2">
+                                @if (artista.Tipo == "Diretor")
+                                {
+                                    <span class="badge bg-warning text-dark">Diretor</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-info">Artista</span>
+                                }
+                            </p>
+                            <div class="mt-auto">
+                                <a asp-action="Details" asp-route-id="@artista.Id" class="btn btn-primary-custom btn-sm w-100">Ver Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+</style>

@@ -1,0 +1,23 @@
+@model StreamWorld.Models.MensagemContato
+
+@{
+    ViewData["Title"] = "Mensagem";
+}
+
+<h1>Mensagem</h1>
+
+<dl class="row">
+    <dt class="col-sm-2">Remetente</dt>
+    <dd class="col-sm-10">@Model.Nome</dd>
+
+    <dt class="col-sm-2">Email</dt>
+    <dd class="col-sm-10">@Model.Email</dd>
+
+    <dt class="col-sm-2">Enviado</dt>
+    <dd class="col-sm-10">@Model.EnviadoEm.ToLocalTime()</dd>
+
+    <dt class="col-sm-2">Mensagem</dt>
+    <dd class="col-sm-10">@Model.Mensagem</dd>
+</dl>
+
+<a asp-action="Index" class="btn btn-secondary">Voltar</a>

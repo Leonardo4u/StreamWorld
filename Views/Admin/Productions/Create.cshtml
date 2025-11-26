@@ -1,0 +1,88 @@
+@model StreamWorld.Models.Producao
+
+@{
+    ViewData["Title"] = "Criar Produção";
+    var genres = ViewBag.Generos as IEnumerable<StreamWorld.Models.Genero>;
+    var artists = ViewBag.Artistas as IEnumerable<StreamWorld.Models.Artista>;
+}
+
+<h1>Criar Produção</h1>
+
+
+@if ((genres == null || !genres.Any()) || (artists == null || !artists.Any()))
+{
+    <div class="alert alert-warning">
+        <strong>Atenção:</strong> Para cadastrar uma produção, é necessário ter pelo menos um gênero e um artista cadastrados.<br />
+        Cadastre gêneros e artistas antes de criar uma produção.
+    </div>
+}
+else
+{
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+        <div class="mb-3">
+            <label asp-for="Titulo" class="form-label"></label>
+            <input asp-for="Titulo" class="form-control" />
+            <span asp-validation-for="Titulo" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="LinkCapa" class="form-label"></label>
+            <input asp-for="LinkCapa" class="form-control" placeholder="https://..." />
+            <span asp-validation-for="LinkCapa" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Tipo" class="form-label"></label>
+            <select asp-for="Tipo" class="form-select">
+                <option>Filme</option>
+                <option>Série</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label>Gênero</label>
+            <select asp-for="GeneroId" class="form-select">
+                <option value="">-- Selecione --</option>
+                @foreach (var g in genres)
+                {
+                    <option value="@g.Id">@g.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DiretorId" class="form-label">Diretor</label>
+            <select asp-for="DiretorId" class="form-select">
+                <option value="">-- Selecione --</option>
+                @foreach (var a in artists.Where(a => a.Tipo == "Diretor"))
+                {
+                    <option value="@a.Id">@a.Nome</option>
+                }
+            </select>
+            <small class="text-muted">Apenas pessoas cadastradas como "Diretor"</small>
+        </div>
+        <div class="mb-3">
+            <label>Artistas</label>
+            <select name="selectedArtists" multiple class="form-select">
+                @foreach (var a in artists.Where(a => a.Tipo == "Artista"))
+                {
+                    <option value="@a.Id">@a.Nome</option>
+                }
+            </select>
+            <small class="text-muted">Apenas pessoas cadastradas como "Artista"</small>
+        </div>
+        
+        <div class="mb-3">
+            <label asp-for="AnoCriacao" class="form-label"></label>
+            <input asp-for="AnoCriacao" class="form-control" type="number" min="1900" max="2100" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Resumo" class="form-label"></label>
+            <textarea asp-for="Resumo" class="form-control"></textarea>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Salvar</button>
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    </form>
+}
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

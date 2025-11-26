@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamWorld", "StreamWorld.csproj", "{511EC6BB-85DE-0CBC-F204-3AA92CB01451}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{511EC6BB-85DE-0CBC-F204-3AA92CB01451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{511EC6BB-85DE-0CBC-F204-3AA92CB01451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{511EC6BB-85DE-0CBC-F204-3AA92CB01451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{511EC6BB-85DE-0CBC-F204-3AA92CB01451}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E5EF6ACE-A31C-4AEB-9D33-D9996CCB3E20}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,52 @@
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+    <div class="col-md-4">
+        <h2 class="text-center mb-4" style="color:#f1f1f1;">Área Administrativa - Entrar</h2>
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <div class="mb-3">
+                <label style="color:#f1f1f1;">Usuário</label>
+                <input name="username" class="form-control bg-dark text-white border-secondary" />
+            </div>
+            <div class="mb-3">
+                <label style="color:#f1f1f1;">Senha</label>
+                <input name="password" type="password" class="form-control bg-dark text-white border-secondary" />
+            </div>
+            <button class="btn btn-primary-custom w-100" type="submit">Entrar</button>
+        </form>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="text-danger mt-2">Credenciais inválidas</div>
+        }
+    </div>
+</div>
+
+<style>
+    .btn-primary-custom {
+        background: linear-gradient(45deg, #6f42c1, #bb86fc);
+        border: none;
+        color: #fff;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        background-size: 200% 200%;
+    }
+
+        .btn-primary-custom:hover {
+            background-position: 100% 0;
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+    input.form-control {
+        background-color: #1f1f1f;
+        color: #f1f1f1;
+        border-color: #2b2b2b;
+    }
+
+    h2 {
+        font-weight: 500;
+    }
+</style>

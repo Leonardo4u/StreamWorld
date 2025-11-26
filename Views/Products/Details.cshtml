@@ -1,0 +1,112 @@
+@model StreamWorld.Models.Producao
+
+@{
+    ViewData["Title"] = "Detalhes da Produção";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            @if (!string.IsNullOrWhiteSpace(Model.LinkCapa))
+            {
+                <img src="@Model.LinkCapa" alt="Capa de @Model.Titulo" class="img-fluid rounded shadow" />
+            }
+            else
+            {
+                <div class="bg-secondary text-center p-5 rounded">
+                    <i class="bi bi-film" style="font-size: 5rem; opacity: 0.5;"></i>
+                    <p class="text-muted mt-2">Sem imagem</p>
+                </div>
+            }
+        </div>
+        <div class="col-md-8">
+            <h1 class="mb-3" style="color:#f1f1f1;">@Model.Titulo</h1>
+            
+            <dl class="row">
+                <dt class="col-sm-3">Tipo</dt>
+                <dd class="col-sm-9">
+                    <span class="badge bg-info">@Model.Tipo</span>
+                </dd>
+
+                <dt class="col-sm-3">Gênero</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Genero != null)
+                    {
+                        <span class="badge bg-purple">@Model.Genero.Nome</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Não especificado</span>
+                    }
+                </dd>
+
+                @if (Model.AnoCriacao.HasValue)
+                {
+                    <dt class="col-sm-3">Ano de Criação</dt>
+                    <dd class="col-sm-9">@Model.AnoCriacao</dd>
+                }
+
+                @if (Model.DataLancamento.HasValue)
+                {
+                    <dt class="col-sm-3">Data de Lançamento</dt>
+                    <dd class="col-sm-9">@Model.DataLancamento.Value.ToShortDateString()</dd>
+                }
+
+                @if (Model.Diretor != null)
+                {
+                    <dt class="col-sm-3">Diretor</dt>
+                    <dd class="col-sm-9">
+                        <strong>@Model.Diretor.Nome</strong>
+                    </dd>
+                }
+
+                @if (Model.ProducaoArtistas != null && Model.ProducaoArtistas.Any())
+                {
+                    <dt class="col-sm-3">Artistas</dt>
+                    <dd class="col-sm-9">
+                        @foreach (var pa in Model.ProducaoArtistas)
+                        {
+                            <span class="badge bg-secondary me-1">@pa.Artista?.Nome</span>
+                        }
+                    </dd>
+                }
+            </dl>
+
+            @if (!string.IsNullOrWhiteSpace(Model.Resumo))
+            {
+                <div class="mt-4">
+                    <h5>Resumo</h5>
+                    <p class="text-light">@Model.Resumo</p>
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Sinopse))
+            {
+                <div class="mt-4">
+                    <h5>Sinopse</h5>
+                    <p class="text-light">@Model.Sinopse</p>
+                </div>
+            }
+
+            <div class="mt-4">
+                <a asp-action="Index" class="btn btn-outline-custom">Voltar para Produtos</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .bg-purple {
+        background: linear-gradient(45deg, #6f42c1, #bb86fc);
+    }
+    .btn-outline-custom {
+        border: 2px solid #bb86fc;
+        color: #bb86fc;
+        transition: all 0.3s ease;
+    }
+    .btn-outline-custom:hover {
+        background: linear-gradient(45deg, #6f42c1, #bb86fc);
+        color: #fff;
+        transform: scale(1.05);
+    }
+</style>

@@ -1,0 +1,77 @@
+@model StreamWorld.Models.Producao
+
+@{
+    ViewData["Title"] = "Editar Produção";
+    var genres = ViewBag.Generos as IEnumerable<StreamWorld.Models.Genero>;
+    var artists = ViewBag.Artistas as IEnumerable<StreamWorld.Models.Artista>;
+    var selected = Model.ProducaoArtistas?.Select(pa => pa.ArtistaId).ToArray() ?? Array.Empty<int>();
+}
+
+<h1>Editar Produção</h1>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Titulo" class="form-label"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Tipo" class="form-label"></label>
+        <select asp-for="Tipo" class="form-select">
+            <option selected="@(Model.Tipo=="Filme")">Filme</option>
+            <option selected="@(Model.Tipo=="Série")">Série</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Gênero</label>
+        <select asp-for="GeneroId" class="form-select">
+            <option value="">-- Selecione --</option>
+            @foreach (var g in genres ?? Enumerable.Empty<StreamWorld.Models.Genero>())
+            {
+                <option value="@g.Id" selected="@(Model.GeneroId==g.Id)">@g.Nome</option>
+            }
+        </select>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DiretorId" class="form-label">Diretor</label>
+        <select asp-for="DiretorId" class="form-select">
+            <option value="">-- Selecione --</option>
+            @foreach (var a in (artists ?? Enumerable.Empty<StreamWorld.Models.Artista>()).Where(a => a.Tipo == "Diretor"))
+            {
+                <option value="@a.Id" selected="@(Model.DiretorId==a.Id)">@a.Nome</option>
+            }
+        </select>
+        <small class="text-muted">Apenas pessoas cadastradas como "Diretor"</small>
+    </div>
+    <div class="mb-3">
+        <label>Artistas</label>
+        <select name="selectedArtists" multiple class="form-select">
+            @foreach (var a in (artists ?? Enumerable.Empty<StreamWorld.Models.Artista>()).Where(a => a.Tipo == "Artista"))
+            {
+                <option value="@a.Id" selected="@(selected.Contains(a.Id))">@a.Nome</option>
+            }
+        </select>
+        <small class="text-muted">Apenas pessoas cadastradas como "Artista"</small>
+    </div>
+    <div class="mb-3">
+        <label asp-for="LinkCapa" class="form-label"></label>
+        <input asp-for="LinkCapa" class="form-control" />
+        <span asp-validation-for="LinkCapa" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+    <label asp-for="Sinopse" class="form-label"></label>
+    <textarea asp-for="Sinopse" class="form-control"></textarea>
+    </div>
+    <div class="mb-3">
+        <label asp-for="AnoCriacao" class="form-label"></label>
+        <input asp-for="AnoCriacao" class="form-control" type="number" min="1900" max="2100" />
+    </div>
+    <button class="btn btn-primary" type="submit">Salvar</button>
+    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+</form>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

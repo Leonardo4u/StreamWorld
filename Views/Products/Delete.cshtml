@@ -1,0 +1,24 @@
+@model StreamWorld.Models.Produto
+
+@{
+    ViewData["Title"] = "Excluir Produto";
+}
+
+<h1>Excluir Produto</h1>
+
+<div class="alert alert-warning">
+    Tem certeza que deseja excluir este item?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-2">Nome</dt>
+    <dd class="col-sm-10">@Model.Nome</dd>
+    <dt class="col-sm-2">Categoria</dt>
+    <dd class="col-sm-10">@Model.Categoria</dd>
+</dl>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Excluir</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
