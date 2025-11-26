@@ -178,17 +178,21 @@ git clone https://github.com/Leonardo4u/StreamWorld
 ---
 
 ## 3️. Aplicar migrações
+```
 dotnet ef database update
+```
 
 ---
 
 ## 4. Executar o servidor
+```
 dotnet run
+```
 
 ---
 
 Estrutura da Solução
-/Models
-/Views
-/Controllers
-/wwwroot
+- /Models
+- /Views
+- /Controllers
+- /wwwroot
