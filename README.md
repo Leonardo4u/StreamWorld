@@ -133,51 +133,48 @@ admin / 1234
 ---
 
 ## 🎞️ Produção
-ID
-Título
-Data de lançamento
-Diretor
-Foto
-Gêneros (N:N)
-Artistas (N:N) + personagem
+- ID
+- Título
+- Data de lançamento
+- Diretor
+- Foto
+- Gêneros (N:N)
+- Artistas (N:N) + personagem
 
 ## 🎭 Artista
-ID
-Nome
-Data de nascimento
-País
-Foto
+- ID
+- Nome
+- Data de nascimento
+- País
+- Foto
 
 ## 🏷️ Gênero
-ID
-Nome
+- ID
+- Nome
 
 ## ✉️ Contato
-ID
-Nome
-E-mail
-Assunto
-Mensagem
-Data/Hora
+- ID
+- Nome
+- E-mail
+- Assunto
+- Mensagem
+- Data/Hora
 
 ---
 
 # ⚙️ Como Executar o Projeto
 
----
 
 ## 1️. Clonar o repositório
 
 git clone https://github.com/Leonardo4u/StreamWorld
-
----
 
 ## 2️. Configurar o appsettings.json
 ```json
 "ConnectionStrings": {
   "DefaultConnection": "SUA_CONNECTION_STRING_AQUI"
 }
-
+```
 ---
 
 ## 3️. Aplicar migrações
